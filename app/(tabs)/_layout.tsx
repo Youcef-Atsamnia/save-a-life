@@ -1,33 +1,70 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { FontAwesome6 } from '@expo/vector-icons';
+import { Href, Redirect, Tabs } from 'expo-router';
 
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { useLocale } from '@/hooks/use-locale';
+import { useAuth } from '@/hooks/use-auth';
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const { user } = useAuth();
+  const { t } = useLocale();
+
+  if (!user) {
+    return <Redirect href="/login" />;
+  }
+
+  if (!user.email_verified) {
+    return <Redirect href={'/verify-email' as Href} />;
+  }
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
-        tabBarButton: HapticTab,
+        tabBarActiveTintColor: '#B3242A',
+        tabBarInactiveTintColor: '#6E625D',
+        tabBarStyle: {
+          backgroundColor: '#FFFDF9',
+          borderTopColor: '#E1D6CA',
+          height: 74,
+          paddingBottom: 10,
+          paddingTop: 10,
+        },
       }}>
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: t('tabs.home'),
+          tabBarIcon: ({ color, size }) => <FontAwesome6 color={color} name="house-medical" size={size} />,
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="create-request"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: t('tabs.request'),
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome6 color={color} name="hand-holding-droplet" size={size} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="donors"
+        options={{
+          title: t('tabs.donors'),
+          tabBarIcon: ({ color, size }) => <FontAwesome6 color={color} name="users" size={size} />,
+        }}
+      />
+      <Tabs.Screen
+        name="map"
+        options={{
+          title: t('tabs.facilities'),
+          tabBarIcon: ({ color, size }) => <FontAwesome6 color={color} name="map-location-dot" size={size} />,
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: t('tabs.profile'),
+          tabBarIcon: ({ color, size }) => <FontAwesome6 color={color} name="user" size={size} />,
         }}
       />
     </Tabs>
