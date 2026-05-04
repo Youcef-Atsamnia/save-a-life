@@ -1,50 +1,132 @@
-# Welcome to your Expo app 👋
+# Save a Life
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Save a Life is a full-stack blood donation platform that connects available donors with urgent blood requests nearby.
 
-## Get started
+## Stack
 
-1. Install dependencies
+- Mobile: Expo + React Native + TypeScript
+- Backend: Node.js + Express
+- Database: PostgreSQL
+- Auth: JWT
+
+## Features
+
+- User registration and login
+- Confirm-password registration flow
+- Email OTP verification with local OTP preview for development
+- Nearby urgent blood requests
+- Create blood requests with urgency and location
+- Donor discovery filtered by blood type and city
+- Verified hospitals and blood banks with phone numbers and addresses
+- Profile management with availability toggle
+- Donation history tracking
+- Donor points, certificate progress, reputation score, and 90-day cooldown countdown
+- Multi-language support for English, French, and Arabic
+- Matching logic based on blood compatibility, availability, proximity, and 90-day donation rule
+
+## Project Structure
+
+```text
+.
+|-- app/                  Expo Router routes
+|-- components/           Reusable mobile UI components
+|-- screens/              Screen-level mobile views
+|-- services/             API and storage services
+|-- navigation/           Navigation constants
+|-- backend/
+|   |-- src/
+|   |   |-- config/
+|   |   |-- controllers/
+|   |   |-- middleware/
+|   |   |-- models/
+|   |   |-- routes/
+|   |   |-- services/
+|   |   `-- utils/
+|   `-- database/schema.sql
+```
+
+## Environment Variables
+
+Frontend `.env`
+
+```env
+EXPO_PUBLIC_API_URL=http://localhost:5000/api
+```
+
+Backend `backend/.env`
+
+```env
+PORT=5000
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/save_a_life
+JWT_SECRET=change-me
+JWT_EXPIRES_IN=7d
+CLIENT_URL=http://localhost:8081
+DEFAULT_SEARCH_RADIUS_KM=50
+```
+
+Templates are included in [`.env.example`](/c:/Users/joseph/Save_a_Life/.env.example) and [`backend/.env.example`](/c:/Users/joseph/Save_a_Life/backend/.env.example).
+
+## Setup
+
+1. Install root dependencies:
 
    ```bash
    npm install
    ```
 
-2. Start the app
+2. Install backend dependencies:
 
    ```bash
-   npx expo start
+   cd backend
+   npm install
    ```
 
-In the output, you'll find options to open the app in a
+3. Create PostgreSQL database:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+   ```sql
+   CREATE DATABASE save_a_life;
+   ```
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+4. Run the schema from [`backend/database/schema.sql`](/c:/Users/joseph/Save_a_Life/backend/database/schema.sql).
+   If you already created the database earlier, rerun this file because it now adds new user columns and the `verified_facilities` table.
 
-## Get a fresh project
+5. Copy env templates and adjust values.
 
-When you're ready, run:
+6. Start the backend:
 
-```bash
-npm run reset-project
-```
+   ```bash
+   npm run api
+   ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+7. In a second terminal, start Expo:
 
-## Learn more
+   ```bash
+   npm start
+   ```
 
-To learn more about developing your project with Expo, look at the following resources:
+## API Endpoints
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- `POST /api/auth/register`
+- `POST /api/auth/login`
+- `POST /api/auth/send-otp`
+- `POST /api/auth/verify-otp`
+- `GET /api/users`
+- `GET /api/users/me`
+- `PUT /api/users/:id`
+- `POST /api/requests`
+- `GET /api/requests`
+- `PUT /api/requests/:id`
+- `POST /api/donations`
+- `GET /api/donations/user/:id`
+- `GET /api/facilities`
 
-## Join the community
+## Validation
 
-Join our community of developers creating universal apps.
+- Frontend type check: `cmd /c .\node_modules\.bin\tsc.cmd --noEmit`
+- Frontend lint: `npm run lint`
+- Backend load check: `node -e "require('./src/app'); console.log('backend ok')"`
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Notes
+
+- Push notifications and a production email provider are not wired yet.
+- OTP verification works locally using the preview code returned by the backend after registration or resend.
