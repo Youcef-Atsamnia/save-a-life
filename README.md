@@ -2,12 +2,22 @@
 
 Save a Life is a full-stack blood donation platform that connects available donors with urgent blood requests nearby.
 
+Blood donation often depends on speed, trust, and access to the right people at the right time. Save a Life was created to make that coordination easier by helping requesters reach nearby compatible donors quickly.
+
+## Status
+
+This project is currently in development. It is functional as a prototype, but it is not ready for real medical emergency use without production security, request verification, hospital partnerships, and compliance review.
+
 ## Stack
 
 - Mobile: Expo + React Native + TypeScript
-- Backend: Node.js + Express
+- Navigation: Expo Router + React Navigation
+- Location: Expo Location
+- Maps: React Native Maps
+- Backend: Node.js + Express REST API
 - Database: PostgreSQL
 - Auth: JWT
+- Configuration: `.env` files for frontend and backend settings
 
 ## Features
 
@@ -23,6 +33,16 @@ Save a Life is a full-stack blood donation platform that connects available dono
 - Donor points, certificate progress, reputation score, and 90-day cooldown countdown
 - Multi-language support for English, French, and Arabic
 - Matching logic based on blood compatibility, availability, proximity, and 90-day donation rule
+
+## App Flow
+
+- Register or log in with a donor profile
+- Add blood type, city, availability, and location details
+- Browse nearby urgent blood requests
+- Create an emergency blood request with urgency and location
+- Find compatible donors by blood type and city
+- Browse verified hospitals and blood banks
+- Track donation history, donor points, reputation score, and certificate progress
 
 ## Project Structure
 
@@ -57,7 +77,7 @@ Backend `backend/.env`
 
 ```env
 PORT=5000
-DATABASE_URL=postgresql://postgres:postgres@localhost:5432/save_a_life
+DATABASE_URL=postgresql://postgres:your-password@localhost:5432/save_a_life
 JWT_SECRET=change-me
 JWT_EXPIRES_IN=7d
 CLIENT_URL=http://localhost:8081
@@ -120,6 +140,22 @@ Templates are included in [`.env.example`](/c:/Users/joseph/Save_a_Life/.env.exa
 - `GET /api/donations/user/:id`
 - `GET /api/facilities`
 
+## Possible Future Features
+
+- Interactive map view for nearby donors, hospitals, blood banks, and urgent requests
+- Push notifications for compatible donors when a new urgent request is created nearby
+- SMS or WhatsApp contact flow for faster emergency communication
+- Donor availability schedules
+- Hospital or blood bank admin dashboard
+- Request verification system to reduce fake or duplicate requests
+- Live request status tracking
+- In-app chat between requesters and donors with privacy protections
+- Appointment booking with partner hospitals and blood banks
+- Advanced donor eligibility checks
+- Improved badges, certificates, leaderboards, and milestones
+- Offline-friendly access to important facility contact information
+- Admin moderation tools for users, requests, facilities, and reports
+
 ## Validation
 
 - Frontend type check: `cmd /c .\node_modules\.bin\tsc.cmd --noEmit`
@@ -130,3 +166,7 @@ Templates are included in [`.env.example`](/c:/Users/joseph/Save_a_Life/.env.exa
 
 - Push notifications and a production email provider are not wired yet.
 - OTP verification works locally using the preview code returned by the backend after registration or resend.
+
+## Disclaimer
+
+Save a Life is a software prototype and should not be used as a replacement for official emergency medical services, verified hospital systems, or professional medical advice.

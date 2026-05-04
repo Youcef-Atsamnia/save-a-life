@@ -1,0 +1,76 @@
+Save a Life - App Description
+
+Save a Life is a full-stack blood donation platform designed to connect people who need urgent blood with nearby eligible donors. The app helps users create emergency blood requests, discover compatible donors, and find verified hospitals and blood banks.
+
+The mobile app is built with Expo and React Native, while the backend uses Node.js and Express. It supports donor profiles with blood type, city, availability, and location data, making it easier to match requests with donors who are most likely to help quickly.
+
+Tech stack:
+- Expo: used to build and run the cross-platform mobile application.
+- React Native: used for the mobile user interface and app screens.
+- TypeScript: used in the frontend for safer types and better development experience.
+- Expo Router: used for file-based navigation between app screens and tabs.
+- React Navigation: used together with Expo Router for tab navigation and screen structure.
+- React Native Maps: included for map and location-based features.
+- Expo Location: used to request location permissions and support nearby donor/request matching.
+- Node.js: used for the backend runtime.
+- Express.js: used to build the REST API.
+- JWT authentication: used to protect user-specific backend routes.
+- PostgreSQL: used as the relational database for users, blood requests, donations, and facilities.
+- SQL schema files: used to define database tables, indexes, and seed data.
+- REST API services: used to connect the mobile app to backend endpoints.
+- Environment variables: used to configure frontend and backend settings.
+
+Project status:
+This project is currently in development. It is functional as a prototype, but it is not ready for real medical emergency use without production security, request verification, hospital partnerships, and compliance review.
+
+Key features:
+- Create urgent blood donation requests by blood type, city, location, and urgency level.
+- Find available donors filtered by blood type and city.
+- Match donors using blood compatibility, availability, distance, and donation eligibility rules.
+- View nearby urgent requests and respond as a donor.
+- Browse verified hospitals and blood banks with contact details.
+- Track donation history, donor points, and profile statistics.
+- Support multiple languages, including English, French, and Arabic.
+
+App flow:
+- A user registers or logs in with their personal donor profile.
+- The user adds their blood type, city, availability, and location details.
+- Requesters can create urgent blood requests with the needed blood type and urgency level.
+- Donors can browse open requests and respond when they are compatible.
+- Users can search for donors by blood type and city.
+- Users can view verified hospitals and blood banks with phone numbers and addresses.
+- Donors can track donation history, points, reputation, and certificate progress.
+
+Backend API areas:
+- Authentication: register, login, OTP verification, and protected user sessions.
+- Users and donors: profile management, donor discovery, availability, and location data.
+- Requests: emergency blood request creation, listing, filtering, and status updates.
+- Donations: records completed donation responses and updates request status.
+- Facilities: verified hospital and blood bank directory.
+
+Possible future features:
+- Real interactive map view showing nearby donors, hospitals, blood banks, and urgent requests.
+- Push notifications for compatible donors when a new urgent request is created nearby.
+- SMS or WhatsApp contact flow for faster emergency communication.
+- Donor availability schedule so users can choose when they are able to donate.
+- Hospital or blood bank admin dashboard for validating requests and updating facility data.
+- Request verification system to reduce fake or duplicate emergency requests.
+- Live request status tracking, such as open, matched, in progress, completed, or cancelled.
+- In-app chat between requester and donor with privacy protections.
+- Appointment booking with partner hospitals and blood banks.
+- More advanced donor eligibility checks based on health conditions, donation history, and local rules.
+- Gamification improvements such as badges, certificates, leaderboards, and milestones.
+- Offline-friendly mode for saving important facility contact information.
+- Better accessibility support for users with visual, motor, or language needs.
+- Analytics dashboard showing donation impact, response times, and city-level demand.
+- Admin moderation tools for users, requests, facilities, and reports.
+- Integration with national or regional blood bank systems where available.
+- More complete profile privacy controls so donors can choose what information is visible.
+
+Why this project matters:
+Blood donation often depends on speed, trust, and access to the right people at the right time. Save a Life was created to make that coordination easier by helping requesters reach nearby compatible donors quickly.
+
+The goal of Save a Life is to make blood donation coordination faster, clearer, and more accessible, especially during emergencies where every minute matters.
+
+Disclaimer:
+Save a Life is a software prototype and should not be used as a replacement for official emergency medical services, verified hospital systems, or professional medical advice.
